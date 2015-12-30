@@ -1,0 +1,135 @@
+<html>
+<head>
+  <title>SpectrumViewJS Hello World</title>
+
+  <style type="text/css">
+      svg {
+          font-family: sans-serif;
+      }
+      
+      .spectrum {
+          width: 1000; 
+          height: 100; 
+          border: solid #ddd 1px;
+      }
+  
+  </style>
+  
+  <script type="text/javascript" src="../../bower_components/jquery2/jquery.min.js"></script>
+  <script type="text/javascript" src="../../bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+
+  <script type="text/javascript" src="../../src/SpectrumViewMath.js"></script>
+  <script type="text/javascript" src="../../src/SpectrumViewUtils.js"></script>
+  <script type="text/javascript" src="../../src/SpectrumView.js"></script>
+
+
+  <script type="text/javascript">
+      function readInputRange() {
+			$('#message').html('');
+		
+			// Deal with the start/lower Frequency
+
+			startFreq = $('input[name=\'startFreq\']').val();
+
+			if (!startFreq || startFreq.trim().length === 0) {					
+				$('#message').html('Error: please specify a minimum and maximum value');
+			} else {
+				startFreq = parseFloat(startFreq.trim());
+				startFreq = startFreq * Math.pow(10,$('select[name=\'unitLF\']').val());
+			}
+
+			// Deal with the end/upper Frequency
+
+			endFreq = $('input[name=\'endFreq\']').val();
+
+			if (!endFreq || endFreq.trim().length === 0) {
+				$('#message').html('Error: please specify both a minimum and maximum value');
+			} else {
+				endFreq = parseFloat(endFreq.trim());
+				endFreq = endFreq * Math.pow(10,$('select[name=\'unitUF\']').val());
+			}
+		 
+			if ( endFreq < startFreq ) {
+				$('input[name=\'startFreq\']').addClass('error');
+				$('input[name=\'endFreq\']').addClass('error');
+				$('#message').html('Error: minimum frequency should be less than maximum frequency');
+				return;
+			}
+		
+			return [startFreq, endFreq];      
+      }
+      
+      $(document).ready( function () {     
+          var range = readInputRange(); 
+
+          var spectrum = SpectrumView('spectrum2', [Math.pow(10,14), Math.pow(10,16)]);
+          //var spectrum = SpectrumView('spectrum3', [ 2 * Math.pow(10,14), 4.5 * Math.pow(10,14)]);
+
+          var spectrum = SpectrumView('spectrum', range);
+
+          
+          $('input[name=\'apply\']').on('click', function () {
+
+                var range = readInputRange()
+                if (range) {
+                	spectrum.changeRange(range);
+                }				
+          });
+      });
+      
+  </script>
+  
+</head>
+
+<body>
+  <h1>SpectrumViewJS Hello World</h1>
+  
+  <p>Just a scratch pad for now</p>
+
+<!--
+<p>static:</p>
+  <div id="spectrum3" class="spectrum"></div>
+-->
+
+<p>static:</p>
+  <div id="spectrum2" class="spectrum"></div>
+
+<p>adjustable:</p>
+  <div id="spectrum" class="spectrum"></div>
+  
+    <div id="message"></div>
+	<div class="row">&nbsp;</div>
+
+		<div class="row">
+		<label>Display Range (Frequency):</label> 
+		<input type="text" name="startFreq" id="startFreq" size="6" value="3"/> 
+		<select name="unitLF">
+		<option value="0"selected="">Hz</option>
+		<option value="3">kHz</option>
+		<option value="6">MHz</option>
+		<option value="9" >GHz</option>
+		<option value="12">THz</option>
+		<option value="15">PHz</option>
+		</select>		    
+		- 
+		
+		<input type="text" name="endFreq" id="endFreq" size="6" value="100"/> 
+		<select name="unitUF">
+		<option value="0">Hz</option>
+		<option value="3">kHz</option>
+		<option value="6">MHz</option>
+		<option value="9">GHz</option>
+		<option value="12">THz</option>
+		<option value="15" selected="">PHz</option>
+		
+		</select>
+		
+		<input type="button" value="apply" name="apply"/>
+		
+		(range: min &gt; 0 &amp; max &lt; infinity)
+	</div>
+		
+</body>
+
+</html>
+

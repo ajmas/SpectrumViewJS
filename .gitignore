@@ -1,0 +1,9 @@
+TAGS
+*~
+_*
+.DS_Store
+node_modules
+playground
+*.svg
+bower_components
+

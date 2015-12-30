@@ -1,0 +1,26 @@
+{
+  "name": "SpectrumViewJS",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ajmas/SpectrumViewJS",
+  "authors": [
+    "Andre-John Mas <andrejohn.mas@gmail.com>"
+  ],
+  "description": "Electromagnetic spectrum view, using SVG & Javascript",
+  "main": "dist/spectrumview-min.js",
+  "keywords": [
+    "svg",
+    "spectrum",
+    "electromagnetic",    
+    "js",
+    "javascript"
+  ],
+  "license": "Apache 2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "demos",
+    "src"
+  ]
+}
