@@ -31,3 +31,7 @@ Status
 This is very much an pre-alpha, so expect API changes and instability,
 as the project evolves and feedback tweaks the focus.
 
+License
+-------
+
+MIT
